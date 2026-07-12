@@ -1,7 +1,7 @@
 import pytest
 from converter import convert
 
-##Trigger the tests with pytest
+##Trigger the tests with pytest 2
 
 def test_celsius_to_fahrenheit():
     assert convert("c2f", 0) == pytest.approx(32.0)
