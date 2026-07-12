@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     paths:
-      - '01-intro-to-devops/project/**'
+      - '1-IntroToDevOps/project/**'
   pull_request:
     paths:
-      - '01-intro-to-devops/project/**'
+      - '1-IntroToDevOps/project/**'
 
 jobs:
   lint-and-test:
@@ -22,13 +22,13 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        working-directory: 01-intro-to-devops/project/app
+        working-directory: 1-IntroToDevOps/project/app
         run: pip install -r requirements.txt
 
       - name: Lint with ruff
-        working-directory: 01-intro-to-devops/project/app
+        working-directory: 1-IntroToDevOps/project/app
         run: ruff check .
 
       - name: Run tests
-        working-directory: 01-intro-to-devops/project/app
+        working-directory: 1-IntroToDevOps/project/app
         run: pytest -v
