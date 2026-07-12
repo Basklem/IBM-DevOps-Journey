@@ -1,3 +1,5 @@
+**Note on authorship:** This project's code and pipeline were built with Claude (Anthropic). I'm still early in my DevOps/software engineering journey, so I leaned on Claude to help generate the code, workflow config, and this write-up — while I directed the project scope and pipeline requirements, and worked through the setup and debugging myself (including fixing a path mismatch that kept the workflow from triggering). I plan to rely on it less as I build up more hands-on experience through this certificate.
+
 # Course 1 Project — Tiny Unit Converter + CI Pipeline
 
 **Course:** Introduction to DevOps (Course 1 of 15, IBM DevOps and Software Engineering)
