@@ -4,7 +4,7 @@ Notes, labs, and progress tracking for the [IBM DevOps and Software Engineering 
 
 ## Progress Tracker
 
-Update the status column as you go: ✅ done, ➡️ in progress, ⬜ not started.
+✅ done ➡️ in progress ⬜ not started
 
 | # | Course | Status |
 |---|--------|--------|
@@ -31,4 +31,4 @@ Update the status column as you go: ✅ done, ➡️ in progress, ⬜ not starte
 Each module folder (once created) holds:
 - `notes.md` — notes from Coursera lectures
 - `resources.md` — links, readings, references (only where useful)
-- `labs/` — hands-on lab work, if applicable
+- `project/` — hands-on project/lab work, if applicable
