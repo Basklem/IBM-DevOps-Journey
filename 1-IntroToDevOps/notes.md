@@ -112,8 +112,3 @@ Then I should have 4 black sweaters in stock
 - Circuit breaker pattern is used to identify a problem and then do something about it to avoid cascading failures.
 - The bulkhead pattern can be used to isolate failing services to limit the scope of a failure.
 - Finally, there is chaos engineering, otherwise known as monkey testing.
-
----
-
-## Questions / Things to Revisit
-- 

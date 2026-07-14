@@ -57,8 +57,3 @@
 - Cloud Security Posture Management (CSPM) is an emerging technology that supports the cybersecurity framework. CSPM addresses: misconfigurations, IAM (Identity and Access Management), regulatory compliance management, traffic monitoring, threat response, risk mitigation, digital asset management.
 - Unauthorized access through misuse of employee credentials and improper access controls is the single biggest perceived vulnerability to cloud security, followed by insecure interfaces and APIs, and data loss/leakage.
 - Given concerns around data security and privacy — especially in public cloud environments — encryption plays a key role and is often referred to as the last line of defense in a layered security model.
-
----
-
-## Questions / Things to Revisit
-- 
