@@ -14,6 +14,15 @@
 - Team organization directly shapes system architecture (Conway's Law) — teams should be small, autonomous, mission-aligned, and end-to-end responsible for their business area.
 - Agile only delivers its full benefit if the *entire* organization (including Ops) adopts it — otherwise you get "Water-Scrum-Fall": Waterfall planning + iterative middle + a slow, painful final deployment.
 - Just iterating on a plan isn't Agile — you're only Agile if you're deploying frequently, getting real customer feedback, and being responsive to change.
+- Don't decide everything at the point you know the least (the start) — plan iteratively from each new vantage point for far more accurate estimates.
+- Renaming people into Agile roles without training fails: product owner ≠ product manager, Scrum master ≠ project manager, and a Scrum team is cross-functional, not just devs. The mindset shift must come from upper management.
+- Tools don't make you Agile — mindset first. A Kanban board (e.g., ZenHub on GitHub) tracks work flowing left to right through pipelines: New Issues → Icebox → Product Backlog → Sprint Backlog → In Progress → Review/QA → Done (done = developer done, not product-owner accepted).
+- A good user story states who/what/why ("As a [role], I need [function], so that [value]"), includes assumptions and Gherkin (Given/When/Then) acceptance criteria, and follows INVEST; ideas too big for one sprint become epics.
+- Story points are abstract, relative sizes (effort + complexity + uncertainty) on a loose Fibonacci scale — agree on what a medium (5) is and compare; never map points to wall-clock time.
+- The product backlog is a ranked list of unimplemented stories — only the top needs precise ranking and sprint-ready detail; requirements become stories via the story template, then get triaged into backlog or icebox.
+- Backlog refinement happens every sprint: triage new issues to empty the inbox (backlog / icebox / reject), rank by priority, and make top stories sprint-ready (details, assumptions, acceptance criteria, labels) — keep ~two sprints' worth refined.
+- Technical debt is work the customer doesn't perceive as value (refactoring, environments, library patches) — label it and pay some down every sprint.
+- In sprint planning the PO presents the sprint goal and the dev team builds the sprint backlog: pull top stories, agree on estimates (they're the ones committing), and stop at the team's velocity — which is per-team and never comparable across teams.
 
 ---
   
@@ -143,3 +152,115 @@
   - Not just developers working in sprints — the team must be cross-functional (devs, testers, business analysts, and ops if doing DevOps), not just software engineers.
   - There is no "Agile project manager" role in the Agile Manifesto — a project manager doing command-and-control isn't Agile; self-managed teams assign work to themselves.
 - Bottom line: iterating on a plan without deploying and getting real customer feedback each cycle, and without being responsive to change, is not Agile — it's just iterative development.
+
+### Module 2: Agile Planning
+
+#### Section 1: Planning to be Agile
+
+**Destination Unknown**
+- Upfront planning is why deadlines get missed: at the start of a project you know the *least*, yet that's when traditional planning decides everything.
+- "Navigating the unknown" (field-of-penguins analogy): you can only plot a few steps from your current vantage point, and the terrain keeps shifting (OS patches, package updates, changing requirements) — so plot a course, advance, then re-plot from the new vantage point.
+- Core rule: **don't decide everything at the point you know the least.** Plan only for what you know now; as you learn more, adjust the plan.
+- Iterative planning gives more accurate estimates: you can predict the next two weeks with near-100% accuracy, but three months out maybe 50% — so commit in short horizons and re-estimate as you go.
+- Don't try to be omniscient — plan as you go, and estimates of where you are and how long things will take keep improving.
+
+**Agile Roles and the Need for Training**
+- Placing existing people into new Agile roles *without training* leads to failure. Three common (bad) direct mappings:
+  - Product manager → product owner: the product manager is typically a business/budget/operations person; the product owner is the *visionary* who leads the team through experiments toward the sprint goal and acts as the conduit between stakeholders and team (translating business requirements into technical goals). Different skill sets — sometimes the same person works, sometimes not (job title vs. Scrum role).
+  - Project manager → Scrum master: a project manager is a task manager who keeps everyone marching to a plan and *documents risks* ("what are you going to do to unblock yourself?"); a Scrum master is a coach who keeps the team focused and self-managing and *eliminates impediments* ("let me handle that for you"). Also: nobody assigns work on a Scrum team — the team assigns work to themselves, which is why "how do I know when I've assigned too much work?" is the wrong question entirely.
+  - Development team → Scrum team: a dev team is just software engineers; a Scrum team is cross-functional (devs, testers, security, business analysts, ops — whoever is needed to build an increment). You must actually reorganize, not just relabel.
+- Without training, people fall back on old habits — e.g., a project manager will try to turn a Kanban board into a Gantt chart because that's all they know.
+- Bill Cantor quote: until business leaders stop managing projects with fixed functions, timeframes, and costs (Waterfall-style), they'll struggle to use Agile as designed.
+- The Agile mindset must come down from upper management: stop asking "what will you deliver by end of year?" and start asking "what will you do in the next two weeks — how will you delight my customers at the end of the next sprint?"
+
+**Kanban and Agile Planning Tools**
+- A tool won't make you Agile — you need the Agile mindset/process first; tools only *support* the process. (Untrained people will make a Kanban board look like a Gantt chart — two totally different things.)
+- Many Agile planning tools exist and mostly do the same thing; epics and stories are enough to describe plans — tasks/subtasks veer into micromanaging.
+- Course tool: **ZenHub** — a GitHub plugin that adds a Kanban board/project management on top of GitHub. Why it's good:
+  - Uses GitHub issues as the stories — developers stay in their normal tool, so there's no second system to update (statuses in separate tools are out of date ~100% of the time).
+  - One up-to-date version of the truth; anyone (including management) can open the board and instantly see what's not started, in progress (and by whom), and done.
+  - Customizable columns (called *pipelines*), simple or complex as you want — keep it simple.
+- Kanban board = at its simplest: things to do, things you're doing, things you've done; move items left → right to show progress. Can literally be a whiteboard with sticky notes.
+- ZenHub's default pipelines (workflow left → right):
+  1. **New Issues** — the "inbox"; every new issue lands here. Triage it quickly during backlog refinement: move it to another pipeline or reject it, don't let it sit.
+  2. **Icebox** — cold storage (unique to ZenHub) for long-term/someday items, so they're not forgotten but don't clutter active pipelines.
+  3. **Product Backlog** — everything you ever want to do that isn't done and isn't in a sprint yet.
+  4. **Sprint Backlog** — what you're doing in the next two weeks (pulled from the product backlog during sprint planning); the only pipeline developers need to focus on.
+  5. **In Progress** — actively being worked; developers assign stories to themselves (avatar shows who's on what).
+  6. **Review/QA** — work complete, pull request open; other devs review to make sure it meets the criteria to merge. (GitHub/ZenHub can auto-move PRs here.)
+  7. **Done** — code merged; means the *developer* is done, NOT that the product owner has accepted it (acceptance happens at sprint review).
+- Flow: new stories come in on the left, a done increment goes out on the right; devs finish a story, then pull the next one from the sprint backlog into In Progress themselves.
+
+#### Section 2: User Stories
+
+**Creating Good User Stories**
+- User story = a piece of business value the team can deliver within a done increment. More than an old-style "requirement" ("I need this/that") — it captures *who* it's for, *what* they need, and critically *why* (the business value).
+- A good story contains: a description of the business value (who/what/why), any assumptions and details you know (e.g., "we're using a relational database, don't go looking at NoSQL" — anything discussed while writing the story that helps the developer), and acceptance criteria (definition of done).
+- Story description template: **As a [role], I need [function], so that [business value].** The role clarifies who benefits (marketing manager? customer? sysadmin?), and the business value is what you'll use later to prioritize the backlog.
+- Acceptance criteria matter because you don't want the product owner saying "that's not what I wanted" at sprint review — with an agreed definition of done, the story either has the behavior or it doesn't (if they want something else, that's a *new* story). No arguments.
+- Acceptance criteria use **Gherkin** syntax: **Given** (precondition, sets up the scenario) / **When** (the triggering action) / **Then** (the testable, measurable result).
+- Example story: "As a marketing manager, I need a list of customer names and emails, so that I can notify them of marketing promotions." Assumptions: we maintain customer emails; customers have opted in. Acceptance: Given 100 customers in the DB and 90 opted in to email promotions, When I request a customer email list, Then I should see 90 (not 100) emails. Stakeholders can confirm it's the behavior they want; developers can confirm it's deliverable.
+- **INVEST** (Bill Wake) — good stories are:
+  - **I**ndependent — rankable/movable in the backlog on their own (not always possible, but aim for it)
+  - **N**egotiable — scope can flex up or down; not too tightly coupled to one exact implementation
+  - **V**aluable — clear customer value (vs. pure technical-debt work the customer never sees)
+  - **E**stimable — enough info to size it (small/medium/large)
+  - **S**mall — must fit within a single sprint
+  - **T**estable — you can test the definition of done
+- **Epics** = big ideas too large for one sprint. Epics sit above stories in the hierarchy and are made up of smaller stories. Backlog items often *start* as epics and get broken down into sprint-sized stories during refinement — any story you can't estimate or fit in a sprint becomes an epic.
+
+**Effectively Using Story Points**
+- Story points = an *abstract, relative* metric estimating the difficulty of implementing a story. The abstractness is the point — don't fight it.
+- Three components of the estimate: **effort** (how much work — can be high even for easy/boring tasks), **complexity** (how hard), and **uncertainty** (have you done this before? never-done-before = rate it higher).
+- Humans are terrible at estimating wall-clock time ("the only thing that takes 30 minutes is 30 minutes — everything else takes longer"), so don't estimate in time at all. Use T-shirt sizes instead.
+- Since you can't add up S/M/L, use Fibonacci numbers — but don't get too granular. Recommended: 3 = small, 5 = medium, 8 = large, 13 = extra large, and not much beyond.
+- The team must *agree on what a medium (5) is*, then size everything else relative to it — like estimating building heights: if this building is a 5, the shorter one next to it is a 3, the taller one an 8, the tallest a 13.
+- Keep stories small — ideally completable in a couple of days. A 21 won't fit in a sprint: break it into smaller stories (possibly spanning sprints, tracked with an epic).
+- **Anti-pattern: equating story points to wall-clock time** ("a 1 is one day, a 3 is three days...") — classic move of an ex-project-manager Scrum master who thinks in Gantt-chart dates. Never do this. A medium might take 2–3 days, sometimes 4 — agree on the fuzziness, keep it relative.
+
+**Building the Product Backlog**
+- Product backlog = a *ranked* list of all unimplemented stories (not in a sprint, waiting to be worked).
+- Ranking effort is front-loaded: only the top (next sprint or two) needs accurate ranking by business importance; lower items can stay relatively unranked. Same for detail — top stories should be sprint-ready with full detail, bottom stories can stay fuzzy until later refinement.
+- Converting requirements → stories (hit-counter service example — a service that counts things):
+  - "Need a service for counting things" → As a **user**, I need a service that has a counter, so that I can keep track of how many times something has been done.
+  - "Must allow multiple counters" → As a **user**, I need multiple counters, so that I can keep track of several counts at once.
+  - "Persist counters across restarts" → As the **service provider**, I need the service to persist the last known count, so that users don't lose their counts after a restart.
+  - "Counters can be reset" → As a **system administrator**, I need the ability to reset the counter, so that I can redo counting from the start. (Note the role choice — maybe only sysadmins get to reset.)
+  - Each one-liner requirement becomes a story via the "As a / I need / so that" template — making who benefits and the business value explicit is what enables ranking later.
+- New stories go into New Issues first (the inbox), then get triaged: prioritize into the product backlog in execution order (core service first → persistence → reset) or defer to the icebox (multiple counters = later). MVP thinking applies — first increment might have no persistence at all.
+
+#### Section 3: The Planning Process
+
+**Backlog Refinement: Getting Started**
+- Backlog refinement = rank the backlog in priority order, break large stories into sprint-sized ones, and make sure stories near the top have enough detail that a developer can just pick them up and start.
+- Who attends: **product owner** (key person — has the vision and should be creating/owning the stories), **Scrum master** (assists the PO in refining), and the dev team only *optionally* — bring one or two technical people (lead/architect) to answer technical questions; the whole Scrum team attending is a waste of their time.
+- Goal: a ranked backlog. Product owners who say "everything's important" still have to pick — there's only one #1, one #2, one #3.
+- Do the detail work *here*, not in sprint planning — the more sprint-ready stories are now, the faster planning goes ("you don't want to be doing a lot of typing in the sprint planning meeting").
+- **New issue triage** comes first: customers keep filing new issues (e.g., "remove a counter," "deploy to cloud"), so start every refinement meeting by emptying the New Issues column (it's your inbox). Each new issue goes one of three ways:
+  - → **Product backlog** — doing it soon (maybe even top of the backlog)
+  - → **Icebox** — good idea, not a priority, deal with it in a future sprint
+  - → **Reject** — not where the product is going; never doing it
+  - Example: "remove a counter" → icebox (we don't even have multiple counters yet); "deploy to cloud" → product backlog, ranked *above* reset.
+- Refinement workflow: PO reorders by importance; optionally assign rough story points (nice to know roughly how big the backlog is — the team re-confirms/refines them at sprint planning); split large items, clarify vague ones. Target state: **sprint-ready** stories.
+- Making a story sprint-ready = complete the template: role/function/value + assumptions (e.g., need a one-step atomic increment, a way to get current value) + Gherkin acceptance criteria (Given I've incremented the counter to 2, when I call get counter, then it returns 2).
+- New stories in ZenHub start unassigned, with no labels, milestones, or estimates — refinement fills these in.
+
+**Backlog Refinement: Finishing Up**
+- **Labels** help visualize the work on the board — a few meaningful colors, not too many or they become meaningless. Standard GitHub labels: bug (red = danger), enhancement (cyan), help wanted (green), question, wontfix, invalid. Add a custom **technical debt** label in *yellow* (caution — don't accumulate too much).
+- Grooming examples: persistence story gets an assumption ("use Redis, store counter as a name-value pair in a memcache DB — no relational DB needed"; document decisions like this so the developer doesn't have to guess) and acceptance criteria (Given counter = 2 and I restart the service, then it still returns 2 — proves persistence). Reset story gets an implementation hint (POST to `/counters/<name>/reset` — a separate endpoint so only admins can access it) and criteria (Given counter = 5, when I call reset, then get returns 0).
+- **Technical debt** = anything you must do that the customer doesn't perceive as value. Examples: code refactoring, setting up/maintaining environments, changing databases (SQL → NoSQL), patching vulnerable libraries and retesting. It builds up naturally (not always your fault — e.g., upstream vulnerabilities), so don't shy away from it: label it, make it visible, and **include some technical debt in every sprint plan** to pay it down.
+- "Deploy service to the cloud" labeled technical debt (arguable — availability is value, but customers *expect* availability; it's not a feature they'd recognize).
+- Refinement tips:
+  - Refine every sprint (weekly if lots of requirements come in). Typical cadence: sprint runs Monday → following Friday; review + retrospective that Friday; refinement the Wednesday *before* sprint end; sprint planning first thing Monday.
+  - Keep at least **two sprints' worth of refined stories** in the backlog — buffer if the team finishes early or a refinement meeting gets skipped.
+  - Time spent refining is time saved planning.
+
+**Sprint Planning**
+- Sprint planning = deciding what stories go in the next sprint (how much can we do in two weeks), producing the **sprint backlog**.
+- Who attends: product owner, Scrum master, and the full cross-functional dev team (engineers, testers, ops, BAs). **No stakeholders** — core Scrum roles only.
+- Every sprint needs a **goal**, articulated by the product owner (think "what can we get done in two weeks," not "I need the whole thing"). Stories in the sprint should support the goal. Mid-sprint, the goal keeps you on track — "am I off on a tangent? Am I over-engineering? What did we commit to deliver?"
+- Mechanics (a *development team* activity): take stories from the top of the product backlog → confirm/assign story points (the team commits, so the team decides size — "planning poker" is one way to reach agreement) → verify each story has enough info for *anyone* on the team to pick it up without mid-sprint questions → move into sprint backlog → **stop when you hit the team's velocity**.
+- **Velocity** = number of story points a team completes in a sprint. It changes over time (estimates improve, team gets more competent). Critical: **you cannot compare velocity across teams** — story points are relative to each team's definition of a medium, and teams using bigger numbers aren't doing more work. Velocity is a personal, per-team measure.
+- In ZenHub, create a **milestone** (or ZenHub's newer "sprints" feature) for each sprint: short title (shows in dropdowns — e.g., "Sprint 1: single counter"), description = the sprint goal (e.g., "get a single counter working and deployed to the cloud"), and start/end dates (two weeks — one week is too short, 3+ too long).
+- Planning flow with the board: open each story → team discusses size and assigns estimate (e.g., base counter service = 8, persistence = 5, cloud deploy = 5) → assign it to the sprint milestone → drag to the sprint backlog; the tool totals the pipeline's points. At team velocity (e.g., 18), stop — don't over-commit. It's not the *number* of stories, it's the point total vs. your track record.
+- Responsibility split: product owner presents the sprint goal; the development team creates the sprint plan.
