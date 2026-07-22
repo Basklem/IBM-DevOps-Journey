@@ -68,8 +68,7 @@
 - **Scrum**: a management framework for incremental product development — small, cross-functional, self-managing teams; structure via roles/rules/artifacts; fixed-length **sprints**; goal is a potentially shippable increment every sprint.
 - "Easy to understand, difficult to master" — bring in someone experienced if the team is new to it.
 - **Sprint** = one iteration through design/code/test/deploy, with a clear goal. Typical length: two weeks (four is too long; one is a bit too fast).
-- Process flow: product backlog → backlog refinement (grooming) → sprint planning (produces the sprint backlog) → two-week sprint with daily stand-up → shippable increment. Cycle repeats: plan → build → deploy → get feedback → replan.
-  - Daily stand-up = 3 questions: yesterday, today, blockers.
+- Process flow: product backlog → backlog refinement (grooming) → sprint planning (produces the sprint backlog) → two-week sprint with daily stand-up (see Module 3) → shippable increment. Cycle repeats: plan → build → deploy → get feedback → replan.
 
 **The 3 Roles of Scrum**
 - **Product Owner**: has the vision, decides pivot/persevere, liaison between team and stakeholders. ("Product manager" is a job title; "product owner" is a Scrum role — not always the same person.) Articulates the vision, is the final arbiter of requirements, continuously reprioritizes/grooms the backlog, and solely decides whether to accept/ship or reject each increment.
@@ -108,11 +107,8 @@
 - Iterative planning gives more accurate estimates — near-100% accuracy for the next two weeks vs. ~50% three months out, so commit short and re-estimate often.
 
 **Agile Roles and the Need for Training**
-- Placing people into new Agile roles *without training* fails. Three common bad mappings:
-  - **Product manager → product owner**: PM is typically business/budget-focused; the PO is the *visionary* translating stakeholder needs into technical goals. Different skill sets — sometimes the same person, sometimes not.
-  - **Project manager → Scrum master**: a PM documents risk and asks "what will *you* do about it"; a Scrum master coaches and *eliminates* impediments ("let me handle that"). Also, nobody assigns work on a Scrum team — the team self-assigns.
-  - **Dev team → Scrum team**: a dev team is just engineers; a Scrum team is cross-functional. You have to actually reorganize, not just relabel.
-- Without training, people fall back on old habits (e.g., a PM turning a Kanban board into a Gantt chart).
+- Simply *relabeling* existing people/teams into Agile roles (product manager → product owner, project manager → Scrum master, dev team → Scrum team — see Module 1, Section 2 for how these actually differ) fails without real training and reorganization.
+- Without training, people fall back on old habits — e.g., a former project manager turning a Kanban board into a Gantt chart.
 - The Agile mindset has to come from upper management: ask "what will you deliver in the next two weeks" instead of "what will you deliver by end of year."
 
 **Kanban and Agile Planning Tools**
@@ -150,7 +146,7 @@
 - **Product backlog** = a *ranked* list of all unimplemented stories.
 - Only the top (next sprint or two) needs precise ranking and full detail; lower items can stay fuzzy.
 - Converting requirements → stories (hit-counter example): each one-liner requirement becomes "As a [role], I need [function], so that [value]" — naming who benefits and why is what enables ranking later.
-- New stories land in New Issues first, then get triaged into the product backlog (in execution order) or the icebox (later/lower priority). MVP thinking applies at every step.
+- New stories start in New Issues and get triaged (see Backlog Refinement below) into the backlog or icebox; MVP thinking applies even to the first increment (e.g., ship without persistence first).
 
 #### Section 3: The Planning Process
 
@@ -203,7 +199,7 @@
 - Demo time — live demonstrations for anyone who wants to attend (PO, Scrum master, devs, stakeholders, customers).
 - The PO checks each story against its acceptance criteria to accept it; accepted stories move **Done → Closed**.
 - Feedback becomes new backlog items — seeing a working demo sparks ideas stakeholders wouldn't have had during upfront planning. One of Agile's biggest advantages over Waterfall.
-- **Rejected/incomplete stories**: never roll as-is into the next sprint (it would understate velocity). Close the original (labeled unfinished) so the points still count, then write a fresh story with corrected acceptance criteria.
+- **Rejected stories** follow the same close-and-rewrite pattern as unfinished sprint work (see "Getting Ready for the Next Sprint") — never left dangling or silently redone next sprint.
 
 **The Sprint Retrospective**
 - Reflects on the sprint's health — team and process. **Attendees**: Scrum master + dev team only — the PO is deliberately excluded so the team can speak freely.
