@@ -12,8 +12,8 @@ Notes, labs, and progress tracking for the [IBM DevOps and Software Engineering 
 | 2 | [Introduction to Cloud Computing](./2-IntroToCloudComputing) | ✅ |
 | 3 | [Introduction to Agile Development and Scrum](./3-IntroToAgileDevandScrum) | ✅ |
 | 4 | [Introduction to Software Engineering](./4-IntroToSoftwareEngineering) | ✅ |
-| 5 | [Getting Started with Git and GitHub](./5-GettingStartedWithGitandGitHub) | ➡️ |
-| 6 | Hands-on Introduction to Linux Commands and Shell Scripting | ⬜ |
+| 5 | [Getting Started with Git and GitHub](./5-GettingStartedWithGitandGitHub) | ✅ |
+| 6 | [Hands-on Introduction to Linux Commands and Shell Scripting](./6-HandsOnLinuxCommandsandShellScripting) | ➡️ |
 | 7 | Python for Data Science, AI & Development | ⬜ |
 | 8 | Developing AI Applications with Python and Flask | ⬜ |
 | 9 | Introduction to Containers w/ Docker, Kubernetes & OpenShift | ⬜ |
@@ -24,7 +24,7 @@ Notes, labs, and progress tracking for the [IBM DevOps and Software Engineering 
 | 14 | Monitoring and Observability for Development and DevOps | ⬜ |
 | 15 | DevOps Capstone Project | ⬜ |
 
-**Progress: 4 / 15 complete**
+**Progress: 5 / 15 complete**
 
 ## Repo Structure
 
