@@ -8,6 +8,10 @@
 - You work in a **terminal** that passes commands to a **shell** (e.g., bash); navigate the filesystem with `cd` and paths (`~` home, `/` root, `..` parent, `.` current).
 - Text editing: GUI (gedit) or command line — **nano** (modeless, Ctrl-key commands) and **vim** (Insert mode `i` vs. Command mode — `:w`, `:q`, `:q!`).
 - Software ships as **.deb** or **.rpm** packages managed by package managers that resolve dependencies: apt/Update Manager (deb) and yum/PackageKit (RPM); `pip` does the same for Python libraries.
+- Core command survival kit: info (`whoami`, `uname`, `df -h`, `ps`/`top`, `man`), navigation (`ls -l`, `pwd`, `cd`, `find . -name`), management (`mkdir`/`rmdir`, `touch`, `cp -r`, `mv`, `rm -r` with care, `chmod +x`), viewing (`cat`, `more`, `head`/`tail -n`, `wc -l`).
+- Text wrangling: `sort`, `uniq` (consecutive duplicates only), `grep -i`, `cut -d " " -f 2`, `paste` — the building blocks of file-based data processing.
+- Networking: `hostname`/`ip a` for your config, `ping` for connectivity (ICMP), `curl` to transfer data to/from URLs, `wget` to download files (with recursion).
+- `tar -czf`/`-xzf` archives then gzips (tarball); `zip -r`/`unzip` compresses then bundles — archiving is for portability/backup, compression for size.
 
 ---
 
@@ -73,7 +77,69 @@
 
 ### Module 2: Introduction to Linux Commands
 
-<!-- Videos: Overview of Common Linux Shell Commands · Informational Commands · File and Directory Navigation Commands · File and Directory Management Commands · Viewing File Content · Useful Commands for Wrangling Text Files · Networking Commands · File Archiving and Compression Commands -->
+**Overview of Common Linux Shell Commands**
+- A **shell** is a user interface that interprets commands and runs programs — it's both an interactive language and a scripting language (for automating tasks). Default on most Linux: **bash** ("Bourne Again Shell"); others: sh, ksh, tcsh, zsh, fish. Check yours with `printenv SHELL`; switch by typing `bash`.
+- Command categories (detailed in later videos):
+  - Info: `whoami`, `id`, `uname`, `ps`, `top`, `df`, `man`, `date`
+  - Files: `cp`, `mv`, `rm`, `touch`, `chmod`, `wc`, `grep`
+  - Directories: `ls`, `find`, `pwd`, `mkdir`, `cd`, `rmdir`
+  - Printing content: `cat`, `more`, `head`, `tail`, `echo`
+  - Compression/archiving: `tar`, `zip`, `unzip`
+  - Networking: `hostname`, `ping`, `ifconfig`, `curl`, `wget`
+- Running Linux on Windows: dual-boot partition, virtual machine, emulator (Cygwin), or **WSL** (Windows Subsystem for Linux — runs Linux binaries natively).
+
+**Informational Commands**
+- `whoami` — current username. `id` — user/group IDs (`-u` numeric user ID, add `-n` for the name).
+- `uname` — OS info: alone gives kernel name; `-s -r` name + version; `-v` detailed version.
+- `df` — disk usage of mounted filesystems; `-h` for human-readable units (GB/TB); `df -h ~` scopes to the home directory's disks.
+- `ps` — running processes with PIDs (`-e` = all users' processes). `top` — live "task manager" with CPU/memory usage, sorted by CPU by default (`-n 3` = top 3 tasks).
+- `echo` — print text or variables: `echo "string"` (quotes are best practice), `echo $PATH` for variables.
+- `date` — current date/time; format with `+"..."` and `%` controls (e.g., `%j` day of year, `%Y` year, `%A` weekday).
+- `man <command>` — the manual for any default command (square brackets = optional parameters); `man man` works too.
+
+**File and Directory Navigation Commands**
+- `ls` — list directory contents; takes a directory as argument (`ls Downloads`); `-l` for long format (permissions, last-modified, owner).
+- `pwd` — print (present) working directory.
+- `cd` — change directory using **relative** paths (relative to where you are: `cd Documents`, `cd ..`) or **absolute** paths (stand independently: `cd ~` home, `cd /home/me/Documents/Notes`).
+- `find` — return paths of all files matching a criterion: `find . -name "a.txt"` (`.` = search from current directory); `-iname` = case-insensitive.
+
+**File and Directory Management Commands**
+- `mkdir test` — create a directory; `rmdir` — remove *empty* directories only (safe: can't nuke data).
+- `rm file1` — remove a file; `rm -r folder1` — remove a directory and everything in it (**use with care**; prefer `rmdir` for empty dirs).
+- `touch a.txt b.txt` — create empty files; on an existing file it updates the last-modified timestamp (check with `date -r file`).
+- `cp src dest` — copy a file (destination filename optional; source defaults to current dir); `cp -r` to copy directories recursively.
+- `mv source target_dir` — move (or rename) files and directories; can move multiple at once: `mv Notes Scripts Documents`.
+- `chmod` ("change mode") — change read/write/execute permissions: a script with only `rw` gives "permission denied" when run; `chmod +x my_script.sh` makes it executable (verify with `ls -l` — look for the `x`).
+
+**Viewing File Content**
+- `cat file` — print the whole file (impractical for long files).
+- `more file` — page-by-page view (page = terminal window); Space = next page, `q` = quit.
+- `head file` / `tail file` — first/last 10 lines; `-n 3` to change the count.
+- `wc file` — counts, output "lines words characters" (newlines count as characters!); `-l` lines only, `-w` words only, `-c` bytes only.
+
+**Useful Commands for Wrangling Text Files**
+- `sort file` — alpha-numeric line sort to stdout; `-r` reverse order.
+- `uniq file` — filter out repeated lines, but only *consecutive* duplicates (a "cat" before and after "dog" lines still appears twice).
+- `grep` ("global regular expression print") — return lines matching a pattern: `grep ch people.txt`; `-i` = case-insensitive.
+- `cut` — extract slices/fields from each line: `-c 2-9` = characters 2–9; `-d " " -f 2` = split on space delimiter and take field 2 (e.g., last names).
+- `paste file1 file2 file3` — merge lines from multiple files side by side (tab delimiter by default; `-d ","` to change) — turns parallel files into a table.
+
+**Networking Commands**
+- `hostname` — get/set the machine's hostname (`-s` drops the `.local` domain suffix; `-i` shows its IP address).
+- `ip` — configure/display network interfaces: `ip a` = all interfaces (IPs, MAC addresses); `ip addr show eth0` = one device (packets sent/received, errors, drops).
+- `ping url` — test connectivity: sends **ICMP** echo requests, prints a line per response (IP, round-trip ms) until Ctrl+C, then summary stats (packets sent/received/lost, min/avg/max/stddev times); `-c 5` = stop after 5 pings.
+- `curl url` — transfer data to/from URLs, many protocols; `curl www.google.com` prints the page HTML; `-o file.txt` writes output to a local file.
+- `wget url` — retrieve files from a URL; like curl but more specialized, with recursive download support (can grab a whole folder of files); auto-names the saved file.
+
+**File Archiving and Compression Commands**
+- **Archiving** = bundling files/directories into a single file for portability/backup; **compression** = shrinking file size by exploiting redundancy (saves storage, speeds transfers, reduces bandwidth). Distinct processes, usually combined.
+- `tar` ("tape archiver") — archive/de-archive ("tarball"):
+  - Create: `tar -cf notes.tar notes` (`c` = create, `f` = to/from file)
+  - Create compressed: `tar -czf notes.tar.gz notes` (`z` = filter through **gzip**; `.gz` suffix helps Windows programs recognize it)
+  - List contents: `tar -tf notes.tar`
+  - Extract: `tar -xf notes.tar [dest]`; extract + decompress: `tar -xzf notes.tar.gz [dest]`
+- `zip -r notes.zip notes` — compress *then* bundle (opposite order from tar, which bundles then gzips the whole tarball); `unzip notes.zip` extracts and decompresses.
+- `ls -R` — recursively list a directory tree (handy for verifying archive/unpack results).
 
 ### Module 3: Introduction to Shell Scripting
 
