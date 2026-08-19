@@ -1,4 +1,4 @@
-# Introduction to DevOps — Notes
+# Introduction to DevOps - Notes
 
 ## Key Takeaways
 - DevOps emphasizes building a culture of shared responsibility, transparency, and embracing failure as a learning opportunity.

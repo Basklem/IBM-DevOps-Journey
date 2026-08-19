@@ -29,6 +29,6 @@ Notes, labs, and progress tracking for the [IBM DevOps and Software Engineering 
 ## Repo Structure
 
 Each module folder (once created) holds:
-- `notes.md` — notes from Coursera lectures
-- `resources.md` — links, readings, references (only where useful)
-- `project/` — hands-on project/lab work, if applicable
+- `notes.md` - notes from Coursera lectures
+- `resources.md` - links, readings, references (only where useful)
+- `project/` - hands-on project/lab work, if applicable
